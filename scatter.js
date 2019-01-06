@@ -1,8 +1,6 @@
 var fw = 820;
 var fh = 520;
-
-var mar = { top: 10, right: 30, bottom: 70, left: 80 };
-
+var mar = { top: 10, right: 30, bottom: 70, left: 100 };
 var w = fw - mar.left - mar.right;
 var h = fh - mar.top - mar.bottom;
 
