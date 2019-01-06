@@ -1,412 +1,220 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-    <meta charset="utf-8">
-    <meta name="auther" content="Vickers_Farcry">
-    <title>movie show</title>
-    <link rel ="stylesheet" type = "text/css" href="max.css">
-    <link rel ="stylesheet" type = "text/css" href="mutiple.css">
-    <link rel ="stylesheet" type = "text/css" href="bar2.css">
-    <link rel ="stylesheet" type = "text/css" href="scatter.css">
-    <link rel ="stylesheet" type = "text/css" href="bar.css">
- 
-  <style type="text/css">
-header {
-padding-top: 170px;
-padding-bottom: 10px;
+<html>
+<head>
+<style type="text/CSS">
+* {
+  box-sizing: border-box;
 }
-.grey-wrapper {
-    background-color: #efefef;
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Unica One', sans-serif;
+  background: rgb(255, 255, 255);
 }
-.opener-title-container {
-width: 900px;
-margin: 0 auto;
-margin-bottom: 30px;
+
+.c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 5rem;
 }
- .body-container {
-width: 800px;
-margin: 0 auto;
-margin-bottom: 60px;
+
+.he {
+  color: rgb(255, 255, 255);
+  font-size: 3rem;
+  font-weight: 300;
+  text-transform: uppercase;
 }
-.body-container-first {
-  width: 800px;
-  margin: 0 auto;
-  margin-bottom: 60px;
-  margin-top: 60px;}
- .svg-container {
- width: 400px;
- height: 300px;
-margin:0 auto;
-margin-bottom: 60px;}
- .bar-container{
-    width: 1200px;
-    }
-			svg {
-				background-color: white;
-			}
+.fullscreenvideo {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transition: 1s opacity;
+    transition: 1s opacity;
+}
 
-			a{
-                text-decoration: none;
-                color:grey;
-            }
+.videocontainer{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -100;	
+}
 
-			.dots {
-				fill: steelblue;
-				opacity: .7;
-			}
-
-			.dotlabels {
-				font-size: 10px;
-				color: black;
-			}
-
-			.highlighted {
-				fill: orange;
-			}
-
-			.axis path,
-			.axis line {
-				fill: none;
-				stroke: black;
-				shape-rendering: crispEdges;
-			}
-
-			.axis text {
-				font-family: sans-serif;
-				font-size: 11px;
-			}
-
-			.xlabel{
-				font-size: 15px;
-				fill: gray;
-			}
-			.ylabel{
-				font-size: 15px;
-				fill: gray;
-			}
-
-			button {
-                background-color: #e6e6e6;
-                -webkit-border-radius: 5;
-                -moz-border-radius: 5;
-                border-radius: 5px;
-                font-family: Arial;
-                color: #adc1c2;
-                font-size: 15px;
-                padding: 5px 10px 5px 10px;
-                text-decoration: none;
-                cursor: pointer;
-                margin-right: 20px;
-                margin-bottom: 10px;
-            }
-
-       
-            .circle:hover {
-                cursor: pointer;
-            }	
-
-            .tooltip {
-                position: absolute;
-                z-index: 10;
-            }
-
-            .tooltip p {
-                background-color: white;
-                color: grey;
-                border: grey 1px solid;
-                padding: 1px;
-			}
-			
-            .dotlabels {
-				font-size: 10px;
-				color: black;
-			}
-
-			#sca{
-                width: 600px;
-				margin-left: 0px;
-				margin-bottom: 60px;
-            }
-            
-  </style>
-    </head>
-    <body>
+.videocontainer:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: rgba(25,29,34,.65);
+}
+#button {position: absolute;
+	left:45%;top:60%}
+    
+    
+  outline:none;
   
-        <div class="header tk-futura-pt"> 
+}
+</style>
 
-                <p class="foo"> Source: IMDB data，<a href=" "> Box-Office-Star-Records</a> </p >
-                <p class="foo"> Designed by Vicerks Farcry</p >
-                <p class="foo"> Tutor:Liu Jiaxin </p >
-                
-
-</div>
-
-
-   <div class="grey-wrapper">
-    <div class="opener-title-container tk-futura-pt">
-         <p class="opener-title">Movie Gross</p>
-        <p class="opener-title-sub">Breaking down factors that influence the gross
-       
-        </p>
-        </div>
-   
-    </div>
-     </div>
-    
-     <div class="body-container">
-     <p class="tk-futura-pt prose-head">
-            THE TIME OF ACTION MOVIES
-           </p>
-           <p class="prose">
-                The mutiple line charts below show the change in gross of different kinds of movies between 1986 and 2016.
-                You can slide your mouse to explore the trends.
-              
-                </p>
-              
-
-
-            <div class="container">
-                    <div id="form">
-                    <label id="count"></label>
-                    <label id="country"></label>
-                    </div>
-                     <div id="vis"></div>
-                    </div>
-                </div>
-                </div>
-
-       
-    
-   
-    <div class="body-container ft-futura-p">
-		<h3>
-Comedy is standing still
-		 </h3>
-            <p class="prose">In the past,Action and Comedy were long the highest-grossing movies combined. 
-                In 1986, the comedy genre ranked first among all film genres with a total box office of $1.11 billion,
-                 Thirty years later, in 2016, action movies grossed $4.65 billion at the box office,
-                  while comedies grossed just $1.09 billion. Action movies have made four times as much money as comedies.
-            </p>
-            <p class="prose">
-                   What has caused the overall box office of comedy to stagnate for 30 years? 
-                   Is there a huge problem with the development of comedy ? Don't. In fact, as early as 1986, 
-                   the number of comedic (mainly Hollywood) genre films worldwide reached the limited edition of its box office.
-                    The top grossing comedy film of 1986 was Back to School , which earned $91.25 million. 
-                    As a low-cost family comedy, it also ranked third in the box office in 2016. In 2016, 
-                    the worldwide smash hit “la la land” took in just $150 million.
-            </p>
-		<h3>Action movie makes a difference</h3>
-		<p class="prose">
-                On the other hand, the number of action movie gross increased from $800 million to $4 billion throughout the period.
-                 Two factors attribute to the continuous rise: the deep operation of IP movies and the strong use of visual technology.
-                  In 1989, action films like Indiana Jones and the Last Crusade could bring companies about $190 million and were the top three grossing films in North America,
-                   while the classic comedy Home Alone grossed $280 million in 1990. 
-                   At that time, Indiana Jones was a popular style of action films. 
-    
-        </p>
-        <p class="prose">
-                However, in the 21st century, action movies gradually develop towards the direction of big IP,
-                 big production and big special effects.
-                  Taking the Star Wars movies as an example, on the one hand, 
-                  after mature commercial operation and packaging,
-                   the classic elements such as lightsaber duel and darth vader in the movies have strong recognition in the hearts of audiences,
-                    especially those born in the 1980s and 1990s, and become the place of their faith.
-                     Once that audience has become a major consumer of the market,
-                      once there's a lightsaber fight on screen, they're bound to make a pilgrimage to the theater,
-                       not to a romantic comedy. On the other hand, there are fewer scenes and more realistic effects.
-                        Big IP+ big special effects action movies, and other movies increasingly seem not to be in the same dimension.
-		</p>
-
-
-		<h3>Cartoons have risen to prominence</h3>
-		<p class="prose">
-		Statistics show that the box office performance of animated films has experienced a miraculous rise in the past 30 years. From about $100 million in 1986 to nearly $2.5 billion in 2016. This is also due to the victory of big IP+ big effects. In 1996, pixar made toy story for Disney, which became a milestone for animated films. Animated films have produced one classic after another for us: shrek, nemo, cars, baymax... On the other hand, advances in 3D technology have also made animated films less youthful and cooler.
-		</p>
-        </div>
-</div>
-<div class="body-container ft-futura-p">
-			
-		<h3>Directors and Box office</h3>
-                <p class="prose">
-Which director has accumulated the most money? The chart below will tell you the answer.
-                </p></div>
-
-   <div class="body-container">
-        <div class="svg-container">
-           <svg id="circleBar" viewBox="0 0 310 310" xmlns="http://www.w3.org/2000/svg">
-             <text id="circleBarPercentage" class="circle-bar-percentage" text-anchor="middle"></text>
-             <text id="circleBarHours" class="circle-bar-hours" text-anchor="middle"></text>
-             <text id="circleBarMessage" class="circle-bar-message" text-anchor="middle"></text>
-             <g id="arcs"></g>
-             <g id="lines"></g>
-             <g id="arcHovers"></g>
-           </svg>
-        </div>
-
-
-        <div class="body-container ft-futura-p">
-			
-	
-       <p class="prose">
-            The Hollywood industrial system growing up in the last 30 years, 
-            Spielberg is obviously the most bankable director.
-             The numbers is available and accounted since 1986 when Spielberg's two well-known classics,
-              E.T. and Jaws don't appear in the data list ($430 million and $270 million respectively). 
-              However, he still takes the first place in the box office with more than 20 films including Saving Private Ryan, 
-              Minority Report and Jurassic park. Audience have been appreciating him for a long period.
-         </p>
-		<p class="prose">
+</head>
+<body>
+    <div class="videocontainer">
+        <video class="fullscreenvideo" poster="__ROOT__/Themes/tdt/Asset/images/loginbg.jpg" id="bgvid" playsinline="" autoplay="" muted="false" loop="">
+          <source src="a.mp4" type="video/mp4">
+        </video>
 		
-James Cameron (no. 4) and Nolan (no. 5) are both gold-medal directors.
- James Cameron has directed two significant hits,
-  Titanic and Avatar in the period while the number of movies that Spielberg make comes to 17 respectively.
- Luckily, there will be three consecutive Avatar sequels coming out in 2020, 2022 and 2024. 
-   It is noticeable that with his great reputation, there is no doubt that he's just the director who is able to bring every generations to theaters.
+      </div>
 
-		</p>
-		<p class="prose">
-                Peter Jackson, Michael bay and David Yates represent another directing style. They directed a series of hits. Peter Jackson built Middle Earth, earning him fame and fortune. 
-		</p>
-		<p class="prose">	
-                Bay's previous films, such as "Island" and "Island of the Clones", are also successful in the box office and made him one of the top directors in Hollywood. "Transformers" earned him $1.6 billion and propelled him to no. 2. However, critics have gradually overdrawn his reputation. In 2016, he won the Golden Raspberry Award for the worst director.  </p>
-        <p class="prose">David yates is the most extreme case. He did not have any influential works before harry potter. His "harry potter" movies didn't have the kind of critical acclaim that "the Lord of the rings" did, but they did make money.
-			</p>
-            </div>
-            <div class="body-container">
-                
-     <div class="body-container ft-futura-p">
-            <h3>Actors and Box office</h3>
-            <p class="prose">
-                For another thing, who can bring companies more money as a leading role in movies?
-                </p>
-
-
-            </div>
-<div class="bar-container">
-    <div class="bar-chart a" data-total="42" animated>
-            <span class="bar-chart--inner" style="width:15%;">Robort Downey 4.5B</span>
-        </div>
-        <div class="bar-chart b" data-total="42" animated>
-            <span class="bar-chart--inner" style="width:15%;">Tom Hanks 4.5B</span>
-    
-        </div>
-        
-        <div class="bar-chart c" data-total="38" animated>
-            <span class="bar-chart--inner" style="width:1.6%;">Scarlett Johansson 4B</span>
-     
-        </div>
-        <div class="bar-chart d" data-total="36" animated>
-            <span class="bar-chart--inner" style="width:13.3%;">Tom Cruise 3.9B</span>
-     
-        </div>
-        
-        <div class="bar-chart e" data-total="34" animated>
-            <span class="bar-chart--inner" style="width:13%;">Samuel L. Jackson 3.8B</span>
-    
-        </div>
-        
-        <div class="bar-chart f" data-total="32" animated>
-            <span class="bar-chart--inner" style="width:12.6%;">Harrison Ford 3.7B</span>
-    
-        </div>
-        <div class="bar-chart g" data-total="30" animated>
-            <span class="bar-chart--inner" style="width:12.2%;">Johnny Depp 3.6B</span>
-        
-        </div>
-        
-        <div class="bar-chart h" data-total="28" animated>
-            <span class="bar-chart--inner" style="width:11.8%;">Eddie Murphy 3.5B</span>
-        
-        </div>
-        
-        <div class="bar-chart i" data-total="26" animated>
-            <span class="bar-chart--inner" style="width:11.4%;">Bradley Cooper 3.4B</span>
-        
-        </div>
-        <div class="bar-chart j" data-total="22" animated>
-            <span class="bar-chart--inner" style="width:10.5%;">Vin Diesel 3.2B</span>
-        
-        </div>
-    </div>
-   </div>
-
-  
-
-     <div class="body-container ft-futura-p">
+<div class="c">
 	
-        <p class="prose">
-"Iron man" is no. 1, black widow is no. 3, and director of S.H.I.E.L.D. is no. 5.
-"Iron man," Robert downey jr., has become the highest-grossing actor in the last 30 years. Is this a reflection of their personal box office appeal? Or a triumph for the marvel cinematic universe? Maybe it's a bit of a complementarity, since before they were in the marvel movies, they didn't make as much money at the box office.
-		 </p>
-		 <p class="prose">
-There is, of course, a case to be made for heroes based on the box office. Hollywood's biggest stars: Tom cruise, Tom Hanks, Johnny Depp and Bradley cooper are all on the list. But we found that in terms of the box office, the Yin and Yang decline phenomenon is particularly serious. Of the top 10, only one: black widow, an actress.
-    </p>
-   
-</div>
+  <h1 class="he" data-target-resolver></h1>
 
-    <div class="body-container">
-    <p class="tk-futura-pt prose-head">
-    VOTES AND BOX OFFICE
-    </p>
-    <p class="prose">
-      Are the imdb votes really to the movie gross?
-        <div id="sca">
-                <div id="bu">
-                <div id="buttons">
-                <button id="all">All MOVIES</button>
-                <button id="popularity">Top 10 GROSS</button>
-                <button id="vote">Top 10 VOTE VALUE</button>
-                </div>
-                </div>
-                </div>
-               
-    </p>
-    </div>
-
-
-        
-        <div class="body-container">
-               
-                <p class="prose">
-                  
-The final shape of the scatter plot is very interesting: almost all the points are in the lower right of the axis, and almost none are in the upper left. Looking at this diagram for the first time, I'm sure you'll agree with us that they are related. The higher the score, the higher the box office, or the higher the box office, the higher the score.
-			</p>
-			<p class="prose">
-However, we analyzed the correlation between the two variables. In fact, the correlation coefficient of the two variables was only 0.16, almost no correlation. That makes sense in real life: highly rated art often underperforms at the box office. The shawshank redemption was a case in point. The film grossed just over $20 million when it was released in 1994, costing its distributor $30 million. 
-			</p>
-			<p class="prose">
-Many of the highest-grossing movies are at a pass-level of 5-7,
- and when you reach that level, you're a movie of quality. 
- But we also notice that there are almost no points at the top left of the table, 
- and there's a magic line that comes out of the table,
-  and there are almost no points at the top left of the table.
-   At the same time, if you look closely at the scatter plot,
-    you will find that the highest box office of the movie with the same score increases as the score gradually increases.
-</p><p class='prose'>This reminds us that word of mouth may not necessarily have a significant positive correlation with box office: that is, 
-     if word of mouth is good and everyone goes to see your movie, but word of mouth has a pass mark, 
-     and when your score is low, it will definitely affect the box office.
-
-A high score doesn't necessarily mean a high box office. A low score doesn't necessarily mean a high box office. That's a bit harsh for our filmmakers, isn't it
-</p>
-               
-                </div>
-              
+	
+	</div>
+	<div id="button">
+		
+		<input name="click" type="button" value="click to explore" style="background-color:transparent;color:#ffffff;font-size: 20px;font-family:微软雅黑;border: 0"onclick="jump()"/>
+		 </div>
 </body>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.1.0/d3.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="isotope.pkgd.min.js"></script>
-<script src="scatter.js"></script>
- <script src="multiple.js"></script>
 
- <script src="bar2.js"></script>
- <script src="bar.js"></script>
- 
+<script type="text/javascript">
+	function jump(){
+ window.location.href="index2.html";
+}
+const resolver = {
+  resolve: function resolve(options, callback) {
+    // The string to resolve
+    const resolveString = options.resolveString || options.element.getAttribute('data-target-resolver');
+    const combinedOptions = Object.assign({}, options, {resolveString: resolveString});
+    
+    function getRandomInteger(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    
+    function randomCharacter(characters) {
+      return characters[getRandomInteger(0, characters.length - 1)];
+    };
+    
+    function doRandomiserEffect(options, callback) {
+      const characters = options.characters;
+      const timeout = options.timeout;
+      const element = options.element;
+      const partialString = options.partialString;
+
+      let iterations = options.iterations;
+
+      setTimeout(() => {
+        if (iterations >= 0) {
+          const nextOptions = Object.assign({}, options, {iterations: iterations - 1});
+
+          // Ensures partialString without the random character as the final state.
+          if (iterations === 0) {
+            element.textContent = partialString;
+          } else {
+            // Replaces the last character of partialString with a random character
+            element.textContent = partialString.substring(0, partialString.length - 1) + randomCharacter(characters);
+          }
+
+          doRandomiserEffect(nextOptions, callback)
+        } else if (typeof callback === "function") {
+          callback(); 
+        }
+      }, options.timeout);
+    };
+    
+    function doResolverEffect(options, callback) {
+      const resolveString = options.resolveString;
+      const characters = options.characters;
+      const offset = options.offset;
+      const partialString = resolveString.substring(0, offset);
+      const combinedOptions = Object.assign({}, options, {partialString: partialString});
+
+      doRandomiserEffect(combinedOptions, () => {
+        const nextOptions = Object.assign({}, options, {offset: offset + 1});
+
+        if (offset <= resolveString.length) {
+          doResolverEffect(nextOptions, callback);
+        } else if (typeof callback === "function") {
+          callback();
+        }
+      });
+    };
+
+    doResolverEffect(combinedOptions, callback);
+  } 
+}
+
+/* Some GLaDOS quotes from Portal 2 chapter 9: The Part Where He Kills You"
+ * Source: http://theportalwiki.com/wiki/GLaDOS_voice_lines#Chapter_9:_The_Part_Where_He_Kills_You
+ */
+const strings = [
+  '"Get busy living,"',
+  '"or get busy dying."',
+  'Are you a big fan of movies?',
+  'Do you enjoy big IP movies?',
+  'Who do you admire?',
+  'Do you want to know more?',
+  '......',
+  'Welcome to THE MOVIE SHOW',
+  '"In case I do not see you ."',
+   '"Good afternoon, "',
+   '"good evening, "',
+   '"and good night."',
+];
+// '"Life is not like in the movies, life is much harder."',
+//   'Nuovo cinema Paradiso',
+let counter = 0;
+
+const options = {
+  // Initial position
+  offset: 0,
+  // Timeout between each random character
+  timeout: 5,
+  // Number of random characters to show
+  iterations: 10,
+  // Random characters to pick from
+  characters: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'x', '#', '%', '&', '-', '+', '_', '?', '/', '\\', '='],
+  // String to resolve
+  resolveString: strings[counter],
+  // The element
+  element: document.querySelector('[data-target-resolver]')
+}
+
+// Callback function when resolve completes
+function callback() {
+  setTimeout(() => {
+    counter ++;
+    
+    if (counter >= strings.length) {
+      counter = 0;
+    }
+    
+    let nextOptions = Object.assign({}, options, {resolveString: strings[counter]});
+    resolver.resolve(nextOptions, callback);
+  }, 1000);
+}
+
+resolver.resolve(options, callback);
+
+    const video= document.getElementById('v1');
+
+    video.playbackRate = 0.5;
 
 
 
- <script>
-  
-  
- </script>
+
+</script>
 </html>
