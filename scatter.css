@@ -1,0 +1,84 @@
+
+			svg {
+				background-color: white;
+			}
+
+			a{
+                text-decoration: none;
+                color:grey;
+            }
+
+			.dots {
+				fill: steelblue;
+				opacity: .7;
+			}
+
+			.dotlabels {
+				font-size: 10px;
+				color: black;
+			}
+
+			.highlighted {
+				fill: orange;
+			}
+
+			.axis path,
+			.axis line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+
+			.axis text {
+				font-family: sans-serif;
+				font-size: 11px;
+			}
+
+			.xlabel{
+				font-size: 15px;
+				fill: gray;
+			}
+			.ylabel{
+				font-size: 15px;
+				fill: gray;
+			}
+
+			button {
+                background-color: #efefef;
+                font-family: Arial;
+                color: #ffffff;
+                font-size: 15px;
+                padding: 5px 10px 5px 10px;
+                text-decoration: none;
+                cursor: pointer;
+                margin-right: 20px;
+                margin-bottom: 10px;
+            }
+
+       
+            .circle:hover {
+                cursor: pointer;
+            }	
+
+            .tooltip {
+                position: absolute;
+                z-index: 10;
+            }
+
+            .tooltip p {
+                background-color: white;
+                color: grey;
+                border: grey 1px solid;
+                padding: 1px;
+			}
+			
+            .dotlabels {
+				font-size: 10px;
+				color: black;
+			}
+
+			#sca{
+                width: 580px;
+				margin-left: 210px;
+				margin-bottom: 60px;
+			}
